@@ -1,0 +1,23 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: eureka-ui-route
+          uri: http://eureka-server:8761
+          predicates:
+            - Path=/eureka-server/**
+          filters:
+            - StripPrefix=1
+        - id: kibana-route
+          uri: http://kibana:5601
+          predicates:
+            - Path=/kibana/**
+  config:
+    import: optional:configserver:http://config-server:8888

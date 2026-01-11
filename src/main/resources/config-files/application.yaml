@@ -1,0 +1,9 @@
+server:
+  port: ${PORT:0}
+  forward-headers-strategy: framework
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${random.value}
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/
